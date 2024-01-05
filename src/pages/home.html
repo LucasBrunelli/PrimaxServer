@@ -7,8 +7,16 @@
 
     <style>
         #campoTexto {
-            width: 100%;
-            height: 200px;
+            width: 80%;
+            height: 180px;
+            overflow: auto;
+        }
+    </style>
+
+    <style>
+        #campoMSG {
+            width: 80%;
+            height: 180px;
             overflow: auto;
         }
     </style>
@@ -23,6 +31,7 @@
 
     <!-- Adicione uma caixa de texto para exibir os dados recebidos -->
     <textarea id="campoTexto" readonly wrap="soft"></textarea>
+    <textarea id="campoMSG"></textarea>
 
     <script>
         // Atualiza a cada 5 segundos (ajuste conforme necessário)
