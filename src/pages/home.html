@@ -11,6 +11,19 @@
     <a href="contato">
         <button>Contato</button>
     </a>
+    
+    <!-- Adicione uma caixa de texto para exibir os dados recebidos -->
+    <input type="text" id="dadosRecebidosInput" readonly>
 
+    <script>
+        // Adicione um script para fazer uma solicitação AJAX para obter os dados
+        // Esta parte pressupõe que você está usando JavaScript moderno (ES6+)
+        fetch('/enviar-dados')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('dadosRecebidosInput').value = JSON.stringify(data.dadosRecebidos);
+            })
+            .catch(error => console.error('Erro:', error));
+    </script>
 </body>
 </html>

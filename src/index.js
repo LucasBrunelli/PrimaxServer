@@ -1,27 +1,29 @@
-const express = require("express")
-const path = require("path")
-const app = express()
-const router = express.Router()
+const express = require("express");
+const path = require("path");
+const bodyParser = require("body-parser");
+const app = express();
+const router = express.Router();
 
-router.get("/", (req, res)=>{
-    res.sendFile(path.join(__dirname + "/pages/home.html"))
-})
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());  // Adicione este middleware para lidar com dados JSON
 
-router.get("/contato", (req, res)=>{
-    res.sendFile(path.join(__dirname + "/pages/contato.html"))
-})
+router.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname + "/pages/home.html"));
+});
 
-app.use(router)
-app.listen(process.env.PORT || 3333, ()=>{
-    console.log("Servidor Rodando")
-})
+router.get("/contato", (req, res) => {
+    res.sendFile(path.join(__dirname + "/pages/contato.html"));
+});
 
-/*
-git remote rm origin
-git init
-git add .
-git commit -m "first commit"
-git branch -M main
-git remote add origin https://github.com/LucasBrunelli/PrimaxServer.git
-git push -u origin main
-*/
+router.post("/enviar-dados", (req, res) => {
+    const dadosRecebidos = req.body;
+
+    // Envia os dados como resposta JSON
+    res.json({ dadosRecebidos });
+});
+
+app.use(router);
+
+app.listen(process.env.PORT || 3333, () => {
+    console.log("Servidor Rodando");
+});
