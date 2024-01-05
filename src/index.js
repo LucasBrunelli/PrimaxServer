@@ -19,8 +19,8 @@ app.listen(process.env.PORT || 3333, ()=>{
 /*
 git remote rm origin
 git init
-git add .  
-git commit -m "first commit" 
+git add .
+git commit -m "first commit"
 git branch -M main
 git remote add origin https://github.com/LucasBrunelli/PrimaxServer.git
 git push -u origin main
