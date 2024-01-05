@@ -1,11 +1,24 @@
 const express = require("express");
 const path = require("path");
-const bodyParser = require("body-parser");
 const app = express();
 const router = express.Router();
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());  // Adicione este middleware para lidar com dados JSON
+let valorField1 = ""; // Variável para armazenar o valor de field1
+
+router.get("/enviar-dados", (req, res) => {
+    const field1 = req.query.field1;
+
+    // Armazena o valor de field1 na variável
+    valorField1 = field1;
+
+    // Envie uma resposta de confirmação ao microcontrolador
+    res.send("Dados recebidos com sucesso!");
+});
+
+router.get("/obter-dados", (req, res) => {
+    // Retorna os dados para a solicitação do cliente (página HTML)
+    res.json({ field1: valorField1 });
+});
 
 router.get("/", (req, res) => {
     res.sendFile(path.join(__dirname + "/pages/home.html"));
@@ -13,13 +26,6 @@ router.get("/", (req, res) => {
 
 router.get("/contato", (req, res) => {
     res.sendFile(path.join(__dirname + "/pages/contato.html"));
-});
-
-router.post("/enviar-dados", (req, res) => {
-    const dadosRecebidos = req.body;
-
-    // Envia os dados como resposta JSON
-    res.json({ dadosRecebidos });
 });
 
 app.use(router);
