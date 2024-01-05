@@ -22,7 +22,7 @@
     </a>
 
     <!-- Adicione uma caixa de texto para exibir os dados recebidos -->
-    <input type="text" id="campoTexto" readonly>
+    <textarea id="campoTexto" readonly wrap="soft"></textarea>
 
     <script>
         // Atualiza a cada 5 segundos (ajuste conforme necessário)
@@ -33,6 +33,7 @@
                 .then(data => {
                     // Atualiza a caixa de texto com os parâmetros recebidos
                     document.getElementById('campoTexto').value = data.parametros;
+                    campoTexto.scrollTop = campoTexto.scrollHeight;
                 })
                 .catch(error => {
                     console.error('Erro ao obter dados:', error);
