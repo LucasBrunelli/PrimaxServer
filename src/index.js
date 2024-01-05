@@ -15,3 +15,13 @@ app.use(router)
 app.listen(process.env.PORT || 3333, ()=>{
     console.log("Servidor Rodando")
 })
+
+/*
+git remote rm origin
+git init
+git add .  
+git commit -m  
+git branch -M main
+git remote add origin https://github.com/LucasBrunelli/PrimaxServer.git
+git push -u origin main
+*/
