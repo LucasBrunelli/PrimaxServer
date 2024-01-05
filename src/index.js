@@ -5,14 +5,15 @@ const router = express.Router();
 
 let valorField1 = ""; // Variável para armazenar o valor de field1
 
-router.get("/enviar-dados", (req, res) => {
-    const field1 = req.query.field1;
+router.get("/enviar-dados/:params*", (req, res) => {
+    // O parâmetro `params` captura todos os caracteres após "/enviar-dados/"
+    const parametros = req.params.params;
 
-    // Armazena o valor de field1 na variável
-    valorField1 = field1;
+    // Faça algo com os parâmetros (por exemplo, armazenar em uma variável ou banco de dados)
+    console.log("Parâmetros recebidos:", parametros);
 
     // Envie uma resposta de confirmação ao microcontrolador
-    res.send("Dados recebidos com sucesso!");
+    res.send("Dados recebidos com sucesso!" + parametros);
 });
 
 router.get("/obter-dados", (req, res) => {
