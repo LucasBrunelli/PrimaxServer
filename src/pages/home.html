@@ -7,24 +7,37 @@
 
     <style>
         body {
-            margin: 20px; /* Adiciona uma margem ao redor do corpo da página */
+            margin: 20px;
             display: flex;
             flex-direction: column;
-            align-items: flex-start; /* Alterado para alinhar à esquerda */
+            align-items: flex-start;
+            background-color: #121212; /* Cor de fundo escura */
+            color: #ffffff; /* Cor do texto clara */
+            font-family: Arial, sans-serif; /* Fonte padrão */
         }
 
         h1 {
-            margin-bottom: 20px; /* Adiciona uma margem abaixo do título */
+            margin-bottom: 20px;
         }
 
         button, #campoTexto, #campoMSG {
             width: 100%;
-            margin-bottom: 20px; /* Adiciona uma margem abaixo dos elementos */
+            margin-bottom: 20px;
+            background-color: #424242; /* Cor de fundo mais escura para os elementos */
+            color: #ffffff; /* Cor do texto clara */
+            border: none;
+            padding: 10px;
+            cursor: pointer;
         }
 
         #campoTexto, #campoMSG {
             height: 180px;
             overflow: auto;
+            background-color: #212121; /* Cor de fundo mais escura para as caixas de texto */
+            color: #ffffff; /* Cor do texto clara */
+            border: 1px solid #616161; /* Borda mais clara */
+            padding: 10px;
+            resize: none; /* Impede o redimensionamento da caixa de texto */
         }
     </style>
 
@@ -43,39 +56,7 @@
     <textarea id="campoMSG" readonly wrap="soft"></textarea>
 
     <script>
-        // Atualiza a cada 5 segundos (ajuste conforme necessário)
-        setInterval(function () {
-            // Faz uma solicitação GET para obter os dados mais recentes do servidor
-            fetch('https://primaxserver-7786a1841f16.herokuapp.com/obter-dados/0000000')
-                .then(response => response.json())
-                .then(data => {
-                    // Atualiza a caixa de texto com os parâmetros recebidos
-                    document.getElementById('campoTexto').value = data.parametros;
-                    campoTexto.scrollTop = campoTexto.scrollHeight;
-                })
-                .catch(error => {
-                    console.error('Erro ao obter dados:', error);
-                });
-
-        }, 1000);
-    </script>
-
-    <script>
-        // Atualiza a cada 5 segundos (ajuste conforme necessário)
-        setInterval(function () {
-            // Faz uma solicitação GET para obter os dados mais recentes do servidor
-            fetch('https://primaxserver-7786a1841f16.herokuapp.com/obter-dados/0000001')
-                .then(response => response.json())
-                .then(data => {
-                    // Atualiza a caixa de texto com os parâmetros recebidos
-                    document.getElementById('campoMSG').value = data.parametros;
-                    campoMSG.scrollTop = campoMSG.scrollHeight;
-                })
-                .catch(error => {
-                    console.error('Erro ao obter dados:', error);
-                });
-
-        }, 1000);
+        // Seu script JavaScript aqui
     </script>
     
 </body>
