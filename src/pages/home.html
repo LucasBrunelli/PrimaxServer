@@ -40,18 +40,36 @@
     <!-- Adicione uma caixa de texto para exibir os dados recebidos -->
     <textarea id="campoTexto" readonly wrap="soft"></textarea>
 
-    <textarea id="campoMSG"></textarea>
+    <textarea id="campoMSG" readonly wrap="soft"></textarea>
 
     <script>
         // Atualiza a cada 5 segundos (ajuste conforme necessário)
         setInterval(function () {
             // Faz uma solicitação GET para obter os dados mais recentes do servidor
-            fetch('https://primaxserver-7786a1841f16.herokuapp.com/obter-dados')
+            fetch('https://primaxserver-7786a1841f16.herokuapp.com/obter-dados/0000000')
                 .then(response => response.json())
                 .then(data => {
                     // Atualiza a caixa de texto com os parâmetros recebidos
                     document.getElementById('campoTexto').value = data.parametros;
                     campoTexto.scrollTop = campoTexto.scrollHeight;
+                })
+                .catch(error => {
+                    console.error('Erro ao obter dados:', error);
+                });
+
+        }, 1000);
+    </script>
+
+    <script>
+        // Atualiza a cada 5 segundos (ajuste conforme necessário)
+        setInterval(function () {
+            // Faz uma solicitação GET para obter os dados mais recentes do servidor
+            fetch('https://primaxserver-7786a1841f16.herokuapp.com/obter-dados/0000001')
+                .then(response => response.json())
+                .then(data => {
+                    // Atualiza a caixa de texto com os parâmetros recebidos
+                    document.getElementById('campoMSG').value = data.parametros;
+                    campoMSG.scrollTop = campoMSG.scrollHeight;
                 })
                 .catch(error => {
                     console.error('Erro ao obter dados:', error);

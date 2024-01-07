@@ -22,11 +22,11 @@ router.get("/enviar-dados/:params*", (req, res) => {
     res.send("Dados recebidos com sucesso!");
 });
 
-router.get("/obter-dados", (req, res) => {
-    // Retorna a string contida na primeira posição do array
-    const parametros = parametrosRecebidos[0];
-
-    // Envia a resposta para a solicitação do cliente (página HTML)
+router.get("/obter-dados/:params*", (req, res) => {
+    const allData = req.params.params;
+    const parteInteira = allData.substring(0, 7);
+    const numeroInteiro = parseInt(parteInteira, 10);
+    const parametros = parametrosRecebidos[numeroInteiro];
     res.json({ parametros });
 });
 
