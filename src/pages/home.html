@@ -11,33 +11,41 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            background-color: #121212; /* Cor de fundo escura */
-            color: #ffffff; /* Cor do texto clara */
-            font-family: Arial, sans-serif; /* Fonte padrão */
         }
 
         h1 {
             margin-bottom: 20px;
         }
 
-        button, #campoTexto, #campoMSG {
+        button {
             width: 100%;
             margin-bottom: 20px;
-            background-color: #424242; /* Cor de fundo mais escura para os elementos */
-            color: #ffffff; /* Cor do texto clara */
+            background-color: #424242;
+            color: #ffffff;
             border: none;
             padding: 10px;
             cursor: pointer;
         }
 
         #campoTexto, #campoMSG {
+            width: 90%;
             height: 180px;
             overflow: auto;
-            background-color: #212121; /* Cor de fundo mais escura para as caixas de texto */
-            color: #ffffff; /* Cor do texto clara */
-            border: 1px solid #616161; /* Borda mais clara */
+            margin-bottom: 20px;
             padding: 10px;
-            resize: none; /* Impede o redimensionamento da caixa de texto */
+            resize: none;
+        }
+
+        #campoTexto {
+            background-color: #212121;
+            color: #ffffff;
+            border: 1px solid #616161;
+        }
+
+        #campoMSG {
+            background-color: #212121;
+            color: #ffffff;
+            border: 1px solid #616161;
         }
     </style>
 
