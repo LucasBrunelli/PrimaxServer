@@ -7,10 +7,16 @@ let parametrosRecebidos = Array(100).fill('');
 
 router.get("/enviar-dados/:params*", (req, res) => {
     // O parâmetro `params` captura todos os caracteres após "/enviar-dados/"
-    const parametros = req.params.params;
+    const allData = req.params.params;
 
-    // Adiciona os parâmetros à primeira posição do array
-    parametrosRecebidos[0] = parametros;
+    // Extrai os primeiros 7 caracteres da string
+    const parteInteira = allData.substring(0, 7);
+
+    // Converte a parte inteira para um número inteiro
+    const numeroInteiro = parseInt(parteInteira, 10);
+
+    // Armazena a parte restante da string na primeira posição do array
+    parametrosRecebidos[numeroInteiro] = allData.substring(7);
 
     // Envie uma resposta de confirmação ao microcontrolador
     res.send("Dados recebidos com sucesso!");
