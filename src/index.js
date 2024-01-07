@@ -3,22 +3,18 @@ const path = require("path");
 const app = express();
 const router = express.Router();
 
-let parametrosRecebidos = "";
+// Agora, parametrosRecebidos é um array
+let parametrosRecebidos = [100];
 
 router.get("/enviar-dados/:params*", (req, res) => {
-    // O parâmetro `params` captura todos os caracteres após "/enviar-dados/"
     const parametros = req.params.params;
-
-    // Armazena os parâmetros na variável
-    parametrosRecebidos = parametros;
-
-    // Envie uma resposta de confirmação ao microcontrolador
+    parametrosRecebidos[1] = parametros;
     res.send("Dados recebidos com sucesso!");
 });
 
 router.get("/obter-dados", (req, res) => {
-    // Retorna os dados para a solicitação do cliente (página HTML)
-    res.json({ parametros: parametrosRecebidos });
+    // Retorna os dados como um array para a solicitação do cliente (página HTML)
+    res.json({ parametros: parametrosRecebidos[1] });
 });
 
 router.get("/", (req, res) => {
