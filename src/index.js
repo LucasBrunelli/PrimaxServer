@@ -13,7 +13,6 @@ router.get("/enviar-dados/:params*", (req, res) => {
 });
 
 router.get("/obter-dados", (req, res) => {
-    // Retorna os dados como um array para a solicitação do cliente (página HTML)
     res.json({ parametros: parametrosRecebidos[1] });
 });
 
