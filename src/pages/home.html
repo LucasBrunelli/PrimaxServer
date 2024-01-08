@@ -7,17 +7,14 @@
 
     <style>
         body {
-            margin: 20px;
+            margin: 20px; /* Adiciona uma margem ao redor do corpo da página */
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
-            background-color: #121212; /* Cor de fundo escura */
-            color: #ffffff; /* Cor do texto clara */
-            font-family: Arial, sans-serif; /* Fonte padrão */
+            align-items: flex-start; /* Alterado para alinhar à esquerda */
         }
 
         h1 {
-            margin-bottom: 20px;
+            margin-bottom: 20px; /* Adiciona uma margem abaixo do título */
         }
 
         button {
@@ -29,46 +26,16 @@
             padding: 10px;
             cursor: pointer;
         }
-
-        #campoTexto, #campoMSG {
-            width: 95%;
-            height: 60px;
-            overflow: auto;
-            margin-bottom: 20px;
-            padding: 10px;
-            resize: none;
-        }
-
-        #campoTexto {
-            background-color: #212121;
-            color: #ffffff;
-            border: 1px solid #616161;
-        }
-
-        #campoMSG {
-            background-color: #212121;
-            color: #ffffff;
-            border: 1px solid #616161;
-        }
     </style>
 
 </head>
 <body>
     
-    <h1> Primax Bike Comunication </h1>
+    <h1> Bike Comunication </h1>
 
-    <a href="contato">
-        <button>Contato</button>
+    <a href="terminal">
+        <button>Bike Terminal</button>
     </a>
 
-    <!-- Adicione uma caixa de texto para exibir os dados recebidos -->
-    <textarea id="campoTexto" readonly wrap="soft"></textarea>
-
-    <textarea id="campoMSG" readonly wrap="soft"></textarea>
-
-    <script>
-        // Seu script JavaScript aqui
-    </script>
-    
 </body>
 </html>

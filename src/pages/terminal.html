@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primax Terminal</title>
+
+    <style>
+        body {
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            background-color: #121212; /* Cor de fundo escura */
+            color: #ffffff; /* Cor do texto clara */
+            font-family: Arial, sans-serif; /* Fonte padrão */
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        button {
+            width: 100%;
+            margin-bottom: 20px;
+            background-color: #424242;
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        #campoTexto, #campoMSG {
+            width: 95%;
+            height: 60px;
+            overflow: auto;
+            margin-bottom: 20px;
+            padding: 10px;
+            resize: none;
+        }
+
+        #campoTexto {
+            background-color: #212121;
+            color: #ffffff;
+            border: 1px solid #616161;
+        }
+
+        #campoMSG {
+            background-color: #212121;
+            color: #ffffff;
+            border: 1px solid #616161;
+        }
+    </style>
+
+</head>
+<body>
+    
+    <h1> Primax Bike Comunication </h1>
+
+    <a href="home">
+        <button>Home</button>
+    </a>
+
+    <!-- Adicione uma caixa de texto para exibir os dados recebidos -->
+    <textarea id="campoTexto" readonly wrap="soft"></textarea>
+
+    <textarea id="campoMSG" readonly wrap="soft"></textarea>
+
+    <script>
+        // Atualiza a cada 5 segundos (ajuste conforme necessário)
+        setInterval(function () {
+            // Faz uma solicitação GET para obter os dados mais recentes do servidor
+            fetch('https://primaxserver-7786a1841f16.herokuapp.com/obter-dados/0000000')
+                .then(response => response.json())
+                .then(data => {
+                    // Atualiza a caixa de texto com os parâmetros recebidos
+                    document.getElementById('campoTexto').value = data.parametros;
+                    campoTexto.scrollTop = campoTexto.scrollHeight;
+                })
+                .catch(error => {
+                    console.error('Erro ao obter dados:', error);
+                });
+
+        }, 1000);
+    </script>
+
+    <script>
+        // Atualiza a cada 5 segundos (ajuste conforme necessário)
+        setInterval(function () {
+            // Faz uma solicitação GET para obter os dados mais recentes do servidor
+            fetch('https://primaxserver-7786a1841f16.herokuapp.com/obter-dados/0000001')
+                .then(response => response.json())
+                .then(data => {
+                    // Atualiza a caixa de texto com os parâmetros recebidos
+                    document.getElementById('campoMSG').value = data.parametros;
+                    campoMSG.scrollTop = campoMSG.scrollHeight;
+                })
+                .catch(error => {
+                    console.error('Erro ao obter dados:', error);
+                });
+
+        }, 1000);
+    </script>
+    
+</body>
+</html>
