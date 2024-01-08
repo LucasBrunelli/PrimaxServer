@@ -34,8 +34,8 @@ router.get("/", (req, res) => {
     res.sendFile(path.join(__dirname + "/pages/home.html"));
 });
 
-router.get("/contato", (req, res) => {
-    res.sendFile(path.join(__dirname + "/pages/contato.html"));
+router.get("/terminal", (req, res) => {
+    res.sendFile(path.join(__dirname + "/pages/terminal.html"));
 });
 
 app.use(router);
