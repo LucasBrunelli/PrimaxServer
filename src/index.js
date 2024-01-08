@@ -3,22 +3,14 @@ const path = require("path");
 const app = express();
 const router = express.Router();
 
-let parametrosRecebidos = Array(100).fill('');
+let dataBank = Array(100).fill('');
+
 
 router.get("/enviar-dados/:params*", (req, res) => {
-    // O parâmetro `params` captura todos os caracteres após "/enviar-dados/"
     const allData = req.params.params;
-
-    // Extrai os primeiros 7 caracteres da string
     const parteInteira = allData.substring(0, 7);
-
-    // Converte a parte inteira para um número inteiro
     const numeroInteiro = parseInt(parteInteira, 10);
-
-    // Armazena a parte restante da string na primeira posição do array
-    parametrosRecebidos[numeroInteiro] = allData.substring(7);
-
-    // Envie uma resposta de confirmação ao microcontrolador
+    dataBank[numeroInteiro] = allData.substring(7);
     res.send("Dados recebidos com sucesso!");
 });
 
@@ -26,7 +18,7 @@ router.get("/obter-dados/:params*", (req, res) => {
     const allData = req.params.params;
     const parteInteira = allData.substring(0, 7);
     const numeroInteiro = parseInt(parteInteira, 10);
-    const parametros = parametrosRecebidos[numeroInteiro];
+    const parametros = dataBank[numeroInteiro];
     res.json({ parametros });
 });
 
