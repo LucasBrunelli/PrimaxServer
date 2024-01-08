@@ -11,7 +11,7 @@ router.get("/enviar-dados/:params*", (req, res) => {
     const parteInteira = allData.substring(0, 7);
     const numeroInteiro = parseInt(parteInteira, 10);
     dataBank[numeroInteiro] = allData.substring(7);
-    res.send("Dados recebidos com sucesso!");
+    res.send("Success!");
 });
 
 router.get("/obter-dados/:params*", (req, res) => {
