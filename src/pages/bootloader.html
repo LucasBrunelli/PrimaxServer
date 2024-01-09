@@ -104,37 +104,49 @@
     <textarea id="campoTexto" readonly wrap="soft"></textarea>
 
     <script>
-        // function abrirSeletorArquivo() {
-        //     // Simula um clique no input de arquivo
-        //     document.getElementById('selecionarArquivo').click();
-        // }
-
         document.getElementById('btnSelecionarArquivo').addEventListener('click', function () {
-            // Simula um clique no input de arquivo
             document.getElementById('selecionarArquivo').click();
         });
 
-        // Manipula o evento de mudança do input de arquivo
         document.getElementById('selecionarArquivo').addEventListener('change', function (event) {
-            const arquivo = event.target.files[0];
+            const arquivoInput = event.target;
 
-            if (arquivo) {
-                // Cria um leitor de arquivos
+            if (arquivoInput.files.length > 0) {
+                const arquivo = arquivoInput.files[0];
                 const leitor = new FileReader();
 
-                // Define a função de callback para quando a leitura for concluída
                 leitor.onload = function (e) {
-                    // Obtém o conteúdo do arquivo como uma string
                     const conteudoArquivo = e.target.result;
 
-                    // Exibe o conteúdo na caixa de texto
                     document.getElementById('campoTexto').value = conteudoArquivo;
+
+                    // Envia o conteúdo ao servidor
+                    enviarConteudoAoServidor(conteudoArquivo);
                 };
 
-                // Lê o conteúdo do arquivo como texto
                 leitor.readAsText(arquivo);
             }
         });
+
+        function enviarConteudoAoServidor(conteudo) {
+            // URL do seu servidor e caracteres adicionais conforme necessário
+            const url = 'https://primaxserver-7786a1841f16.herokuapp.com/enviar-dados/0000000';
+
+            fetch(url, {
+                method: 'GET', // Use 'GET' para passar os dados pela URL
+                headers: {
+                    'Content-Type': 'text/plain', // Defina o tipo de conteúdo como texto simples
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Resposta do servidor:', data);
+                // Adicione lógica adicional conforme necessário
+            })
+            .catch(error => {
+                console.error('Erro ao enviar dados ao servidor:', error);
+            });
+        }
     </script>
 
 </body>
