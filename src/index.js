@@ -4,7 +4,7 @@ const app = express();
 const router = express.Router();
 
 let dataBank = Array(100).fill('');
-
+// maps key = AIzaSyCrfa1EuP78q3dI7Pm7B0RL1UTNKjXvRrw 
 
 router.get("/enviar-dados/:params*", (req, res) => {
     const allData = req.params.params;
