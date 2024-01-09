@@ -30,7 +30,7 @@
         .botoes-container a {
             flex: 1; /* Cada botão ocupa uma parte igual do contêiner */
         }
-        
+
         button {
             width: 100%;
             margin-bottom: 20px;
@@ -41,15 +41,17 @@
             cursor: pointer;
         }
 
-        #btnSelecionarArquivo {
+        #novosBotoesContainer {
             width: 100%;
-            margin-bottom: 20px;
-            background-color: #424242;
-            color: #ffffff;
-            border: none;
-            padding: 10px;
-            cursor: pointer;
+            display: flex;
+            gap: 10px;
         }
+
+        #novosBotoesContainer button {
+            flex: 1;
+        }
+
+
 
         #campoTexto, #campoMSG {
             width: 95%;
@@ -96,11 +98,12 @@
         </a>
     </div>
 
-    <!-- Adiciona um input de arquivo -->
-    <input type="file" id="selecionarArquivo" />
-
-    <!-- Adiciona um botão para abrir o seletor de arquivo -->
-    <button id="btnSelecionarArquivo" onclick="abrirSeletorArquivo()">Selecionar Arquivo</button>
+    <!-- Novo container para os botões -->
+    <div id="novosBotoesContainer">
+        <button onclick="abrirSeletorArquivo()">Abrir Firmware</button>
+        <button onclick="carregarFirmware()">Carregar Firmware</button>
+        <button onclick="lerFirmware()">Ler Firmware</button>
+    </div>
 
     <script>
         function abrirSeletorArquivo() {
@@ -129,6 +132,17 @@
                 leitor.readAsText(arquivo);
             }
         });
+
+        // Adicione as funções para os novos botões conforme necessário
+        function carregarFirmware() {
+            // Adicione sua lógica aqui
+            console.log("Carregar Firmware");
+        }
+
+        function lerFirmware() {
+            // Adicione sua lógica aqui
+            console.log("Ler Firmware");
+        }
     </script>
 
 </body>
