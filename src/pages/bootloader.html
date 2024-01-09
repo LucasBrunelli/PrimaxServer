@@ -4,8 +4,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Primax Bootloader </title>
+
+    <style>
+        body {
+            margin: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            background-color: #121212; /* Cor de fundo escura */
+            color: #ffffff; /* Cor do texto clara */
+            font-family: Arial, sans-serif; /* Fonte padrão */
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        button {
+            width: 100%;
+            margin-bottom: 20px;
+            background-color: #424242;
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        #campoTexto, #campoMSG {
+            width: 95%;
+            height: 60px;
+            overflow: auto;
+            margin-bottom: 20px;
+            padding: 10px;
+            resize: none;
+        }
+
+        #campoTexto {
+            background-color: #212121;
+            color: #ffffff;
+            border: 1px solid #616161;
+        }
+
+        #campoMSG {
+            background-color: #212121;
+            color: #ffffff;
+            border: 1px solid #616161;
+        }
+    </style>
+
 </head>
 <body>
     
+    <h1> Primax Bike Comunication </h1>
+
+    <a href="/">
+        <button>Home</button>
+    </a>
+
+    <input type="file" id="selecionarArquivo" style="display: none" />
+
+    <!-- Adiciona um botão para abrir o seletor de arquivo -->
+    <button onclick="abrirSeletorArquivo()">Selecionar Arquivo</button>
+
+    <script>
+        function abrirSeletorArquivo() {
+            // Simula um clique no input de arquivo
+            document.getElementById('selecionarArquivo').click();
+        }
+
+        // Manipula o evento de mudança do input de arquivo
+        document.getElementById('selecionarArquivo').addEventListener('change', function (event) {
+            const arquivo = event.target.files[0];
+
+            if (arquivo) {
+                // Cria um leitor de arquivos
+                const leitor = new FileReader();
+
+                // Define a função de callback para quando a leitura for concluída
+                leitor.onload = function (e) {
+                    // Obtém o conteúdo do arquivo como uma string
+                    const conteudoArquivo = e.target.result;
+
+                    // Exibe o conteúdo na caixa de texto
+                    document.getElementById('campoTexto').value = conteudoArquivo;
+                };
+
+                // Lê o conteúdo do arquivo como texto
+                leitor.readAsText(arquivo);
+            }
+        });
+    </script>
+
 </body>
 </html>
