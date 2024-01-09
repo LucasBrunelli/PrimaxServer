@@ -41,14 +41,21 @@
             cursor: pointer;
         }
 
+        #btnAbrirFirmware, #btnCarregarFirmware, #btnLerFirmware {
+            width: 100%;
+            margin-bottom: 20px;
+            background-color: #424242;
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
         #novosBotoesContainer {
             width: 100%;
             display: flex;
-            gap: 10px;
-        }
-
-        #novosBotoesContainer button {
-            flex: 1;
+            flex-wrap: wrap; /* Permite que os botões quebrem para a linha seguinte, se necessário */
+            gap: 10px; /* Adiciona espaço entre os botões */
         }
 
 
@@ -100,19 +107,21 @@
 
     <!-- Novo container para os botões -->
     <div id="novosBotoesContainer">
-        <button onclick="abrirSeletorArquivo()">Abrir Firmware</button>
-        <button onclick="carregarFirmware()">Carregar Firmware</button>
-        <button onclick="lerFirmware()">Ler Firmware</button>
+        <button id="btnAbrirFirmware" onclick="abrirSeletorArquivo()">Abrir Firmware</button>
+        <button id="btnCarregarFirmware" onclick="carregarFirmware()">Carregar Firmware</button>
+        <button id="btnLerFirmware" onclick="lerFirmware()">Ler Firmware</button>
     </div>
+
+    <!-- Seu código JavaScript existente aqui ... -->
 
     <script>
         function abrirSeletorArquivo() {
-            // Simula um clique no input de arquivo
-            document.getElementById('selecionarArquivo').click();
+            // Simula um clique no input de arquivo oculto
+            document.getElementById('inputArquivo').click();
         }
 
         // Manipula o evento de mudança do input de arquivo
-        document.getElementById('selecionarArquivo').addEventListener('change', function (event) {
+        document.getElementById('inputArquivo').addEventListener('change', function (event) {
             const arquivo = event.target.files[0];
 
             if (arquivo) {
@@ -124,8 +133,8 @@
                     // Obtém o conteúdo do arquivo como uma string
                     const conteudoArquivo = e.target.result;
 
-                    // Exibe o conteúdo na caixa de texto
-                    document.getElementById('campoTexto').value = conteudoArquivo;
+                    // Exibe o conteúdo na caixa de texto ou faça o que for necessário
+                    console.log(conteudoArquivo);
                 };
 
                 // Lê o conteúdo do arquivo como texto
