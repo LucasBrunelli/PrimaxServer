@@ -20,9 +20,19 @@
             margin-bottom: 20px; /* Adiciona uma margem abaixo do título */
         }
 
+        .botoes-container {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap; /* Permite que os botões quebrem para a linha seguinte, se necessário */
+            gap: 10px; /* Adiciona espaço entre os botões */
+        }
+
+        .botoes-container a {
+            flex: 1; /* Cada botão ocupa uma parte igual do contêiner */
+        }
+
         button {
             width: 100%;
-            margin-bottom: 20px;
             background-color: #424242;
             color: #ffffff;
             border: none;
@@ -36,17 +46,23 @@
     
     <h1> Primax Home </h1>
 
-    <a href="terminal">
-        <button>Bike Terminal</button>
-    </a>
+    <div class="botoes-container">
+        <a href="/">
+            <button>Home</button>
+        </a>
+        
+        <a href="terminal">
+            <button>Bike Terminal</button>
+        </a>
 
-    <a href="bootloader">
-        <button>Bike Bootloader</button>
-    </a>
+        <a href="bootloader">
+            <button>Bike Bootloader</button>
+        </a>
 
-    <a href="local">
-        <button>Primax GPS</button>
-    </a>
+        <a href="local">
+            <button>Primax GPS</button>
+        </a>
+    </div>
 
 </body>
 </html>
