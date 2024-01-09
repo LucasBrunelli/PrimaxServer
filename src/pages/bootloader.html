@@ -71,10 +71,11 @@
         <button>Home</button>
     </a>
 
-    <input type="file" id="selecionarArquivo" style="display: none" />
+    <!-- Adiciona um input de arquivo -->
+    <input type="file" id="selecionarArquivo" />
 
     <!-- Adiciona um botão para abrir o seletor de arquivo -->
-    <button onclick="abrirSeletorArquivo()">Selecionar Arquivo</button>
+    <button id="btnSelecionarArquivo" onclick="abrirSeletorArquivo()">Selecionar Arquivo</button>
 
     <script>
         function abrirSeletorArquivo() {
