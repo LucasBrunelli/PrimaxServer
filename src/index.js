@@ -22,22 +22,6 @@ app.post("/receber-dados/:posicao", (req, res) => {
     }
 });
 
-// Rota para ler dados do dataBank
-router.get("/ler-dados/:posicao", (req, res) => {
-    const posicao = parseInt(req.params.posicao, 10);
-
-    // Verifica se a posição é válida
-    if (posicao >= 0 && posicao < 100) {
-        const parametros = dataBank[posicao];
-        res.json({ parametros });
-    } else {
-        res.status(400).json({ error: "Posição inválida no dataBank." });
-    }
-});
-
-
-
-
 router.get("/enviar-dados/:params*", (req, res) => {
     const allData = req.params.params;
     const parteInteira = allData.substring(0, 7);
