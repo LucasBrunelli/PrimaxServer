@@ -51,9 +51,7 @@
             flex: 1;
         }
 
-        
-
-        #campoTexto{
+        #campoHex{
             width: 95%;
             height: 200px;
             overflow: auto;
@@ -62,7 +60,22 @@
             resize: none;
         }
 
-        #campoTexto {
+        #campoHex {
+            background-color: #212121;
+            color: #ffffff;
+            border: 1px solid #616161;
+        }
+
+        #campoMsg{
+            width: 95%;
+            height: 20px;
+            overflow: auto;
+            margin-bottom: 20px;
+            padding: 10px;
+            resize: none;
+        }
+
+        #campoMsg {
             background-color: #212121;
             color: #ffffff;
             border: 1px solid #616161;
@@ -99,17 +112,32 @@
         <button id="btnLerArquivo" onclick="lerArquivo()">Ler Firmware</button>
     </div>
     
+    <textarea id="campoMsg" readonly wrap="soft"></textarea>
+
     <input type="file" id="selecionarArquivo" accept=".hex" style="display: none;" />
     
-    <textarea id="campoTexto" readonly wrap="soft"></textarea>
+    <textarea id="campoHex" readonly wrap="soft"></textarea>
 
     <script>
+
+        setInterval(function () {
+            fetch('https://primaxserver-7786a1841f16.herokuapp.com/obter-dados/0000011')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('campoMSG').value = data.parametros;
+                    campoMSG.scrollTop = campoMSG.scrollHeight;
+                })
+                .catch(error => {
+                    console.error('Erro ao obter dados:', error);
+                });
+
+        }, 1000);
 
         window.onload = function () {
             fetch('https://primaxserver-7786a1841f16.herokuapp.com/obter-dados/0000000')
                 .then(response => response.json())
                 .then(data => {
-                    document.getElementById('campoTexto').value = data.parametros;
+                    document.getElementById('campoHex').value = data.parametros;
                 })
                 .catch(error => {
                     console.error('Erro ao obter dados do servidor:', error);
@@ -130,7 +158,7 @@
                 leitor.onload = function (e) {
                     const conteudoArquivo = e.target.result;
 
-                    document.getElementById('campoTexto').value = conteudoArquivo;
+                    document.getElementById('campoHex').value = conteudoArquivo;
 
                     // Envia o conteúdo ao servidor usando o método POST
                     enviarConteudoAoServidor(conteudoArquivo);
@@ -162,7 +190,7 @@
         }
 
         function carregarArquivo() {
-            // Chama o endpoint existente para adicionar "Sucesso" na posição 10
+            // Chama o endpoint existente para adicionar "Sucesso" na posição 11
             fetch('https://primaxserver-7786a1841f16.herokuapp.com/enviar-dados/0000011LoadFirm', {
                 method: 'GET',
             })
