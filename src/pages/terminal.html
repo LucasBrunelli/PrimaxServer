@@ -20,6 +20,17 @@
             margin-bottom: 20px;
         }
 
+        .botoes-container {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap; /* Permite que os botões quebrem para a linha seguinte, se necessário */
+            gap: 10px; /* Adiciona espaço entre os botões */
+        }
+
+        .botoes-container a {
+            flex: 1; /* Cada botão ocupa uma parte igual do contêiner */
+        }
+        
         button {
             width: 100%;
             margin-bottom: 20px;
@@ -57,9 +68,23 @@
     
     <h1> Primax Bike Comunication </h1>
 
-    <a href="/">
-        <button>Home</button>
-    </a>
+    <div class="botoes-container">
+        <a href="/">
+            <button>Primax Home</button>
+        </a>
+
+        <a href="terminal">
+            <button>Bike Terminal</button>
+        </a>
+
+        <a href="bootloader">
+            <button>Bike Bootloader</button>
+        </a>
+
+        <a href="local">
+            <button>Primax GPS</button>
+        </a>
+    </div>
 
     <!-- Adicione uma caixa de texto para exibir os dados recebidos -->
     <textarea id="campoTexto" readonly wrap="soft"></textarea>
