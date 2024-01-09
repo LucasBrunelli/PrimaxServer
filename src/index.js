@@ -6,6 +6,38 @@ const router = express.Router();
 let dataBank = Array(100).fill('');
 // maps key = AIzaSyCrfa1EuP78q3dI7Pm7B0RL1UTNKjXvRrw 
 
+// Middleware para processar o corpo da requisição como texto
+app.use(express.text());
+
+// Rota para receber dados da página HTML e armazená-los no dataBank
+app.post("/receber-dados/:posicao", (req, res) => {
+    const posicao = parseInt(req.params.posicao, 10);
+
+    // Verifica se a posição é válida
+    if (posicao >= 0 && posicao < 100) {
+        dataBank[posicao] = req.body;
+        res.send("Dados recebidos e armazenados com sucesso!");
+    } else {
+        res.status(400).send("Posição inválida no dataBank.");
+    }
+});
+
+// Rota para ler dados do dataBank
+router.get("/ler-dados/:posicao", (req, res) => {
+    const posicao = parseInt(req.params.posicao, 10);
+
+    // Verifica se a posição é válida
+    if (posicao >= 0 && posicao < 100) {
+        const parametros = dataBank[posicao];
+        res.json({ parametros });
+    } else {
+        res.status(400).json({ error: "Posição inválida no dataBank." });
+    }
+});
+
+
+
+
 router.get("/enviar-dados/:params*", (req, res) => {
     const allData = req.params.params;
     const parteInteira = allData.substring(0, 7);

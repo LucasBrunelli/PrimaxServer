@@ -120,7 +120,7 @@
 
                     document.getElementById('campoTexto').value = conteudoArquivo;
 
-                    // Envia o conteúdo ao servidor
+                    // Envia o conteúdo ao servidor usando o método POST
                     enviarConteudoAoServidor(conteudoArquivo);
                 };
 
@@ -129,16 +129,17 @@
         });
 
         function enviarConteudoAoServidor(conteudo) {
-            // URL do seu servidor e caracteres adicionais conforme necessário
-            const url = 'https://primaxserver-7786a1841f16.herokuapp.com/enviar-dados/0000000';
+            const posicao = 0; // Defina a posição desejada no dataBank
+            const url = `https://primaxserver-7786a1841f16.herokuapp.com/receber-dados/${posicao}`;
 
             fetch(url, {
-                method: 'GET', // Use 'GET' para passar os dados pela URL
+                method: 'POST', 
                 headers: {
-                    'Content-Type': 'text/plain', // Defina o tipo de conteúdo como texto simples
+                    'Content-Type': 'text/plain',
                 },
+                body: conteudo,
             })
-            .then(response => response.json())
+            .then(response => response.text())
             .then(data => {
                 console.log('Resposta do servidor:', data);
                 // Adicione lógica adicional conforme necessário
