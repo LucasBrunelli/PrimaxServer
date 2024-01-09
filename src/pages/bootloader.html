@@ -73,7 +73,7 @@
 </head>
 <body>
     
-    <h1> Primax Bike Comunication </h1>
+    <h1> Primax Bootloader </h1>
 
     <div class="botoes-container">
         <a href="/">
@@ -94,22 +94,25 @@
     </div>
 
     <div id="novosBotoesContainer">
-        <!-- Adiciona um botão para abrir o seletor de arquivo -->
-        <button id="btnSelecionarArquivo" onclick="abrirSeletorArquivo()">Selecionar Arquivo</button>
+        <button id="btnSelecionarArquivo">Selecionar Arquivo</button>
         <button id="btnCarregarArquivo" onclick="carregarArquivo()">Carregar Arquivo</button>
         <button id="btnLerArquivo" onclick="lerArquivo()">Ler Arquivo</button>
     </div>
-
-    <!-- Adiciona um input de arquivo -->
-    <input type="file" id="selecionarArquivo" />
+    
+    <input type="file" id="selecionarArquivo" style="display: none">
     
     <textarea id="campoTexto" readonly wrap="soft"></textarea>
 
     <script>
-        function abrirSeletorArquivo() {
+        // function abrirSeletorArquivo() {
+        //     // Simula um clique no input de arquivo
+        //     document.getElementById('selecionarArquivo').click();
+        // }
+
+        document.getElementById('btnSelecionarArquivo').addEventListener('click', function () {
             // Simula um clique no input de arquivo
             document.getElementById('selecionarArquivo').click();
-        }
+        });
 
         // Manipula o evento de mudança do input de arquivo
         document.getElementById('selecionarArquivo').addEventListener('change', function (event) {
