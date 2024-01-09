@@ -162,30 +162,8 @@
         }
 
         function carregarArquivo() {
-            const arquivoInput = document.getElementById('selecionarArquivo');
-            const arquivo = arquivoInput.files[0];
-
-            if (arquivo) {
-                // Cria um leitor de arquivos
-                const leitor = new FileReader();
-
-                // Define a função de callback para quando a leitura for concluída
-                leitor.onload = function (e) {
-                    // Obtém o conteúdo do arquivo como uma string
-                    const conteudoArquivo = e.target.result;
-
-                    // Envia os dados para o servidor e adiciona "Sucesso" na posição 10
-                    enviarParaServidor(conteudoArquivo);
-                };
-
-                // Lê o conteúdo do arquivo como texto
-                leitor.readAsText(arquivo);
-            }
-        }
-
-        function enviarParaServidor(conteudoArquivo) {
             // Chama o endpoint existente para adicionar "Sucesso" na posição 10
-            fetch('https://primaxserver-7786a1841f16.herokuapp.com/enviar-dados/0000010Sucesso', {
+            fetch('https://primaxserver-7786a1841f16.herokuapp.com/enviar-dados/0000011LoadFirm', {
                 method: 'GET',
             })
             .then(response => response.text())
@@ -197,7 +175,7 @@
                 console.error('Erro ao enviar dados para o servidor:', error);
             });
         }
-        
+
     </script>
 
 </body>
