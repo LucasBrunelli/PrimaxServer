@@ -106,10 +106,8 @@
                     console.error('Erro ao obter dados:', error);
                 });
 
-        }, 1000);
-    </script>
+        }, 500);
 
-    <script>
         // Atualiza a cada 5 segundos (ajuste conforme necessário)
         setInterval(function () {
             // Faz uma solicitação GET para obter os dados mais recentes do servidor
@@ -124,7 +122,28 @@
                     console.error('Erro ao obter dados:', error);
                 });
 
-        }, 1000);
+        }, 500);
+
+        window.onload = function () {
+            fetch('https://primaxserver-7786a1841f16.herokuapp.com/obter-dados/0000000')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('campoTexto').value = data.parametros;
+                })
+                .catch(error => {
+                    console.error('Erro ao obter dados do servidor:', error);
+                });
+
+            fetch('https://primaxserver-7786a1841f16.herokuapp.com/obter-dados/0000001')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('campoMSG').value = data.parametros;
+                })
+                .catch(error => {
+                    console.error('Erro ao obter dados do servidor:', error);
+                });
+        };
+
     </script>
     
 </body>
