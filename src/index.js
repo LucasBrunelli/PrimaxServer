@@ -35,8 +35,7 @@ router.get("/obter-dados/:params*", (req, res) => {
     const parteInteira = allData.substring(0, 7);
     const numeroInteiro = parseInt(parteInteira, 10);
     const parametros = dataBank[numeroInteiro];
-    // res.json({ parametros });
-    res.send(parametros);
+    res.json({ parametros });
 });
 
 router.get("/", (req, res) => {
