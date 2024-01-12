@@ -122,7 +122,7 @@
         // Atualiza a cada 5 segundos (ajuste conforme necessário)
         setInterval(function () {
             // Faz uma solicitação GET para obter os dados mais recentes do servidor
-            fetch('https://primaxserver-7786a1841f16.herokuapp.com/obter-dados/0000011')
+            fetch('https://primaxserver-7786a1841f16.herokuapp.com/obter-dados/0000000')
                 .then(response => response.json())
                 .then(data => {
                     // Atualiza a caixa de texto com os parâmetros recebidos
@@ -139,7 +139,7 @@
     <script>
 
         window.onload = function () {
-            fetch('https://primaxserver-7786a1841f16.herokuapp.com/obter-dados/0000000')
+            fetch('https://primaxserver-7786a1841f16.herokuapp.com/obter-dados/0000001')
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById('campoHex').value = data.parametros;
@@ -174,7 +174,7 @@
         });
 
         function enviarConteudoAoServidor(conteudo) {
-            const posicao = 0; // Defina a posição desejada no dataBank
+            const posicao = 1; // Defina a posição desejada no dataBank
             const url = `https://primaxserver-7786a1841f16.herokuapp.com/receber-dados/${posicao}`;
 
             fetch(url, {
@@ -196,7 +196,8 @@
 
         function carregarArquivo() {
             // Chama o endpoint existente para adicionar "Sucesso" na posição 11
-            fetch('https://primaxserver-7786a1841f16.herokuapp.com/enviar-dados/0000011Carregando FirmWare no microcontrolador', {
+            let idBikeValue = "0000000";
+            fetch('https://primaxserver-7786a1841f16.herokuapp.com/enviar-dados/0000000BMS Bike_id' + idBikeValue + ' update', {
                 method: 'GET',
             })
             .then(response => response.text())
