@@ -119,7 +119,9 @@
     <textarea id="campoHex" readonly wrap="soft"></textarea>
 
     <script>
-        // Atualiza a cada 5 segundos (ajuste conforme necessário)
+
+        let flagHexLoad = false;
+        
         setInterval(function () {
             // Faz uma solicitação GET para obter os dados mais recentes do servidor
             fetch('https://primaxserver-7786a1841f16.herokuapp.com/obter-dados/0000000')
@@ -134,9 +136,6 @@
                 });
 
         }, 1000);
-    </script>
-
-    <script>
 
         window.onload = function () {
             fetch('https://primaxserver-7786a1841f16.herokuapp.com/obter-dados/0000001')
@@ -163,10 +162,10 @@
                 leitor.onload = function (e) {
                     const conteudoArquivo = e.target.result;
 
-                    document.getElementById('campoHex').value = conteudoArquivo;
-
+                    document.getElementById('campoHex').value = conteudoArquivo;                  
                     // Envia o conteúdo ao servidor usando o método POST
                     enviarConteudoAoServidor(conteudoArquivo);
+                    flagHexLoad = true;
                 };
 
                 leitor.readAsText(arquivo);
@@ -195,17 +194,22 @@
 
         function carregarArquivo() {
             let idBikeValue = "0000001";
-            fetch('https://primaxserver-7786a1841f16.herokuapp.com/enviar-dados/0000000BMS Bike_id' + idBikeValue + ' update', {
-                method: 'GET',
-            })
-            .then(response => response.text())
-            .then(data => {
-                // Exibe a mensagem de sucesso
-                alert(data);
-            })
-            .catch(error => {
-                console.error('Erro ao enviar dados para o servidor:', error);
-            });
+
+            if(flagHexLoad == true){
+                fetch('https://primaxserver-7786a1841f16.herokuapp.com/enviar-dados/0000000BMS Bike_id' + idBikeValue + ' update', {
+                    method: 'GET',
+                })
+                .then(response => response.text())
+                .then(data => {
+                    alert(data);
+                })
+                .catch(error => {
+                    console.error('Erro ao enviar dados para o servidor:', error);
+                });
+                flagHexLoad = false;
+            }else{
+                alert("Primeiro escolha o firmWare para fazer o upload");
+            }            
         }
 
     </script>
