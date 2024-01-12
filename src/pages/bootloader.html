@@ -146,6 +146,15 @@
                 .catch(error => {
                     console.error('Erro ao obter dados do servidor:', error);
                 });
+
+            fetch('https://primaxserver-7786a1841f16.herokuapp.com/obter-dados/0000000')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('campoMSG').value = data.parametros;
+                })
+                .catch(error => {
+                    console.error('Erro ao obter dados do servidor:', error);
+                });
         };
 
         document.getElementById('btnSelecionarArquivo').addEventListener('click', function () {
