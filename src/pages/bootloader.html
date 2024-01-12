@@ -154,7 +154,7 @@
 
         document.getElementById('selecionarArquivo').addEventListener('change', function (event) {
             const arquivoInput = event.target;
-
+            flagHexLoad = true;
             if (arquivoInput.files.length > 0) {
                 const arquivo = arquivoInput.files[0];
                 const leitor = new FileReader();
@@ -164,8 +164,7 @@
 
                     document.getElementById('campoHex').value = conteudoArquivo;                  
                     // Envia o conteúdo ao servidor usando o método POST
-                    enviarConteudoAoServidor(conteudoArquivo);
-                    flagHexLoad = true;
+                    enviarConteudoAoServidor(conteudoArquivo);                  
                 };
 
                 leitor.readAsText(arquivo);
