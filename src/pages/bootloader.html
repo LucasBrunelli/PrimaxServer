@@ -187,7 +187,6 @@
             .then(response => response.text())
             .then(data => {
                 console.log('Resposta do servidor:', data);
-                // Adicione lógica adicional conforme necessário
             })
             .catch(error => {
                 console.error('Erro ao enviar dados ao servidor:', error);
@@ -195,8 +194,7 @@
         }
 
         function carregarArquivo() {
-            // Chama o endpoint existente para adicionar "Sucesso" na posição 11
-            let idBikeValue = "0000000";
+            let idBikeValue = "0000001";
             fetch('https://primaxserver-7786a1841f16.herokuapp.com/enviar-dados/0000000BMS Bike_id' + idBikeValue + ' update', {
                 method: 'GET',
             })
