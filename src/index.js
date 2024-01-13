@@ -47,13 +47,10 @@ router.get("/obter-dados/:params*", (req, res) => {
     const parteInteira = allData.substring(0, 7);
     const numeroInteiro = parseInt(parteInteira, 10);
     if(dataPassWord == "lcb4536@"){
-        let parametros = '[' + dataBank[numeroInteiro] + ']';
-        parametros[parametros.length - 1] = '\n';
-        parametros[parametros.length - 2] = '\r';
-        parametros[parametros.length - 3] = ']';
+        const parametros = dataBank[numeroInteiro];
         res.json({ parametros });
     }else{
-        let parametros = "dados bloqueados";
+        const parametros = "dados bloqueados";
         res.json({ parametros });
     }   
 });
