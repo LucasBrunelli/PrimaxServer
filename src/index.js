@@ -55,12 +55,20 @@ router.get("/obter-dados/:params*", (req, res) => {
     }   
 });
 
-router.get("/obter-dados-texto/:params*", (req, res) => {
-    const allData = req.params.params;
-    const parteInteira = allData.substring(0, 7);
-    const numeroInteiro = parseInt(parteInteira, 10);
+router.get("/obter-dados-hex", (req, res) => {
+
     if(dataPassWord == "lcb4536@"){
-        const parametros = dataBank[numeroInteiro];
+        let auxBank = dataBank[1];
+
+        // Defina o comprimento desejado da string (43 caracteres)
+        const comprimentoDesejado = 43;
+
+        // Use o método padEnd para preencher com espaços
+        auxBank = auxBank.padEnd(comprimentoDesejado, ' ');
+
+        // Adicione quebras de linha entre cada 43 caracteres
+        const parametros = auxBank.match(/.{1,43}/g).join('\r\n');
+
         res.send(parametros);
     }else{
         const parametros = "dados bloqueados";
