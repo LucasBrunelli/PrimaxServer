@@ -58,17 +58,26 @@ router.get("/obter-dados/:params*", (req, res) => {
 router.get("/obter-dados-hex", (req, res) => {
 
     if(dataPassWord == "lcb4536@"){
-        let auxBank = dataBank[1];
-
-        // Defina o comprimento desejado da string (43 caracteres)
-        const comprimentoDesejado = 43;
-
-        // Use o método padEnd para preencher com espaços
-        auxBank = auxBank.padEnd(comprimentoDesejado, ' ');
-
-        // Adicione quebras de linha entre cada 43 caracteres
-        const parametros = auxBank.match(/.{1,43}/g).join('\r\n');
-
+        let auxBank = dataBank[1];     
+        let cntChar = 0;
+        for(let i = 0; i < auxBank.length - 2; i++)
+        {
+            if(auxBank[i] != '\r'){
+                cntChar++;
+            }else{
+                if(cntChar != 43){
+                    let auxNew = auxBank.substring(i);
+                    auxBank = auxBank.substring(0,i);
+                    auxBank = auxBank + ' '.repeat(43-cntChar);
+                    auxBank = auxBank + auxNew;
+                    i = i + 44 - cntChar;
+                }else{
+                    cntChar = 0;
+                    i++;
+                }
+            }
+        }
+        const parametros = auxBank;
         res.send(parametros);
     }else{
         const parametros = "dados bloqueados";
