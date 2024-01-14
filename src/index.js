@@ -55,10 +55,14 @@ router.get("/obter-dados/:params*", (req, res) => {
     }   
 });
 
-router.get("/obter-dados-hex", (req, res) => {
+router.get("/obter-dados-hex/:params*", (req, res) => {
+
+    const allData = req.params.params;
+    const parteInteira = allData.substring(0, 7);
+    const numeroInteiro = parseInt(parteInteira, 10);
 
     if(dataPassWord == "lcb4536@"){
-        let auxBank = dataBank[1];     
+        let auxBank = dataBank[numeroInteiro];     
         let cntChar = 0;
         for(let i = 0; i < auxBank.length - 2; i++)
         {
