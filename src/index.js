@@ -60,8 +60,7 @@ router.get("/obter-dados-hex", (req, res) => {
     if(dataPassWord == "lcb4536@"){
         let auxBank = dataBank[1];     
         let cntChar = 0;
-        let auxlen = auxBank.length;
-        for(let i = 0; i < auxlen - 5; i++)
+        for(let i = 0; i < auxBank.length - 5; i++)
         {
             if(auxBank[i] != '\r'){
                 cntChar++;
@@ -69,10 +68,9 @@ router.get("/obter-dados-hex", (req, res) => {
                 if(cntChar != 43){
                     let auxNew = auxBank.substring(i);
                     auxBank = auxBank.substring(0,i);
-                    auxBank = auxBank + ' ';
+                    auxBank = auxBank + ' '.repeat(43-cntChar);
                     auxBank = auxBank + auxNew;
-                    auxlen++;
-                    i = i + 2;
+                    i = i + 44 - cntChar;
                     cntChar = 0;
                 }else{
                     cntChar = 0;
