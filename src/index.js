@@ -55,6 +55,19 @@ router.get("/obter-dados/:params*", (req, res) => {
     }   
 });
 
+router.get("/obter-dados-texto/:params*", (req, res) => {
+    const allData = req.params.params;
+    const parteInteira = allData.substring(0, 7);
+    const numeroInteiro = parseInt(parteInteira, 10);
+    if(dataPassWord == "lcb4536@"){
+        const parametros = dataBank[numeroInteiro];
+        res.send(parametros);
+    }else{
+        const parametros = "dados bloqueados";
+        res.send(parametros);
+    }   
+});
+
 router.get("/enviar-senha/:params*", (req, res) => {
     const allData = req.params.params;   
     if(allData == "lcb4536@"){
