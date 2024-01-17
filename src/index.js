@@ -109,6 +109,10 @@ router.get("/bootloader", (req, res) => {
     res.sendFile(path.join(__dirname + "/pages/bootloader.html"));
 });
 
+router.get("/local", (req, res) => {
+    res.sendFile(path.join(__dirname + "/pages/local.html"));
+});
+
 app.use(router);
 
 app.listen(process.env.PORT || 3333, () => {
