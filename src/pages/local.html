@@ -20,6 +20,26 @@
             margin-bottom: 20px;
         }
 
+        .botoes-container {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap; /* Permite que os botões quebrem para a linha seguinte, se necessário */
+            gap: 10px; /* Adiciona espaço entre os botões */
+        }
+
+        .botoes-container a {
+            flex: 1; /* Cada botão ocupa uma parte igual do contêiner */
+        }
+
+        button {
+            width: 100%;
+            background-color: #424242;
+            color: #ffffff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+        
     </style>
 
 </head>
@@ -27,13 +47,31 @@
     
     <h1> Primax Bike Location </h1>
 
+    <div class="botoes-container">
+        <a href="/">
+            <button>Primax Home</button>
+        </a>
+
+        <a href="terminal">
+            <button>Bike Terminal</button>
+        </a>
+
+        <a href="bootloader">
+            <button>Bike Bootloader</button>
+        </a>
+
+        <a href="local">
+            <button>Primax GPS</button>
+        </a>
+    </div>
+
     <iframe
-      width="600"
-      height="450"
-      style="border:0"
-      loading="lazy"
-      allowfullscreen
-      src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCrfa1EuP78q3dI7Pm7B0RL1UTNKjXvRrw&q=-19.9070339,-43.9259224">
+        width="600"
+        height="450"
+        style="border:0"
+        loading="lazy"
+        allowfullscreen
+        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCrfa1EuP78q3dI7Pm7B0RL1UTNKjXvRrw&q=-19.9070339,-43.9259224">
     </iframe>
     
     <!-- 19.9070339 S  43.9259224 W -->
