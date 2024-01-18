@@ -40,25 +40,18 @@
             cursor: pointer;
         }
 
-        /* .mapa-container {
-            flex: 1;
+        #map {
             width: 100%;
+            height: 450px;
+            margin-top: 20px;
             position: relative;
-            overflow: hidden;
-            margin-top: 20px; 
         }
-
-        .mapa-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        } */
 
     </style>
 
 </head>
-<body>
-    
+<body onload="initMap()">
+  
     <h1> Primax Bike Location </h1>
 
     <div class="botoes-container">
@@ -79,24 +72,64 @@
         </a>
     </div>
 
-    <!-- <div class="mapa-container">
-        <iframe
-            style="border:0"
-            loading="lazy"
-            allowfullscreen
-            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCrfa1EuP78q3dI7Pm7B0RL1UTNKjXvRrw&q=-19.9070339,-43.9259224">
-        </iframe>
-    </div> -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrfa1EuP78q3dI7Pm7B0RL1UTNKjXvRrw"></script>
 
-    <iframe
+    <div id="map"></div>
+
+    <script>
+        function initMap() {
+            // Cria o mapa
+            var map = new google.maps.Map(document.getElementById("map"), {
+              center: { lat: -19.9070339, lng: -43.9259224 },
+              zoom: 15,
+              mapTypeId: "roadmap",
+            });
+          
+            // Cria o marcador
+            var marker = new google.maps.Marker({
+              map: map,
+              position: { lat: -19.9070339, lng: -43.9259224 },
+            });
+        }
+
+        // function updateMarker(lat, lng) {
+        //     // Atualiza a posição do marcador
+        //     marker.setPosition({ lat: lat, lng: lng });
+        //     // Atualiza o centro do mapa
+        //     map.setCenter({ lat: lat, lng: lng });
+        // }
+
+        // function getData() {
+        //     // Cria o objeto XMLHttpRequest
+        //     var xhr = new XMLHttpRequest();
+        //     // Define a função callback
+        //     xhr.onreadystatechange = function () {
+        //       // Verifica se a requisição foi concluída e bem sucedida
+        //       if (xhr.readyState == 4 && xhr.status == 200) {
+        //         // Converte os dados recebidos em JSON
+        //         var data = JSON.parse(xhr.responseText);
+        //         // Chama a função updateMarker com os dados de latitude e longitude
+        //         updateMarker(data.lat, data.lng);
+        //       }
+        //     };
+        //     // Abre a requisição
+        //     xhr.open("GET", "http://seu-servidor-node.js/dados", true);
+        //     // Envia a requisição
+        //     xhr.send();
+        // }
+
+        // setInterval(getData, 5000);
+
+    </script>
+
+    <!-- <iframe
         width=100%
         height="500"
         style="border: 0; margin-top: 20px;"
         loading="lazy"
         allowfullscreen
         src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCrfa1EuP78q3dI7Pm7B0RL1UTNKjXvRrw&q=-19.9070339,-43.9259224">
-    </iframe>
-    
-    <!-- 19.9070339 S  43.9259224 W -->
+    </iframe> -->
+
 </body>
 </html>
