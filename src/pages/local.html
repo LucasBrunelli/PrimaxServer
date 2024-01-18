@@ -81,11 +81,28 @@
         function initMap() {
 
             // const locationData = detectLocation();
-            // const matches = locationData.match(/lat:(-?\d+\.\d+) lng:(-?\d+\.\d+)/);
-            // let latgps = parseFloat(matches[1]);
-            // let lnggps = parseFloat(matches[2]); 
-            let latgps = -19.9070339;
-            let lnggps = -43.9259224;
+            let locationData = '{"parametros": "lat:-15.4548 lng:-45.45664"}';
+            let latgps;
+            let lnggps;
+            
+            try {
+                const dataObject = JSON.parse(locationData);
+                const matches = dataObject.parametros.match(/lat:(-?\d+\.\d+) lng:(-?\d+\.\d+)/);
+
+                if (matches) {
+                    latgps = parseFloat(matches[1]);
+                    lnggps = parseFloat(matches[2]);
+                    console.log("Latitude:", latgps);
+                    console.log("Longitude:", lnggps);
+                } else {
+                    console.error("Formato de dados inválido");
+                }
+            } catch (error) {
+                console.error("Erro ao analisar dados JSON:", error);
+            }
+
+            // let latgps = -19.9070339;
+            // let lnggps = -43.9259224;
 
             var map = new google.maps.Map(document.getElementById("map"), {
               center: { lat: latgps, lng: lnggps },
@@ -120,7 +137,7 @@
             fetch('https://primaxserver-7786a1841f16.herokuapp.com/obter-dados/0000004')
                   .then(response => response.json())
                   .then(data => {                     
-                      const gpsLocation = data.parametros;
+                      let gpsLocation = data.parametros;
                       return gpsLocation;
                   })
                   .catch(error => {
