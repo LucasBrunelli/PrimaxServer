@@ -77,52 +77,54 @@
     <div id="map"></div>
 
     <script>
+
         function initMap() {
-            // Cria o mapa
+
+            const locationData = detectLocation();
+            const matches = locationData.match(/lat:(-?\d+\.\d+) lng:(-?\d+\.\d+)/);
+            let latgps = parseFloat(matches[1]);
+            let lnggps = parseFloat(matches[2]);
+
             var map = new google.maps.Map(document.getElementById("map"), {
-              center: { lat: -19.9070339, lng: -43.9259224 },
+              center: { lat: latgps, lng: lnggps },
               zoom: 15,
               mapTypeId: "roadmap",
             });
           
-            // Cria o marcador
             var marker = new google.maps.Marker({
               map: map,
-              position: { lat: -19.9070339, lng: -43.9259224 },
+              position: { lat: latgps, lng: lnggps },
             });
 
             var blueDot = "https://i.imgur.com/elyw5s1.png";
-            // Altera o ícone do marcador
             marker.setIcon(blueDot);
         }
 
-        // function updateMarker(lat, lng) {
-        //     // Atualiza a posição do marcador
-        //     marker.setPosition({ lat: lat, lng: lng });
-        //     // Atualiza o centro do mapa
-        //     map.setCenter({ lat: lat, lng: lng });
-        // }
+        // setInterval(function () {
 
-        // function getData() {
-        //     // Cria o objeto XMLHttpRequest
-        //     var xhr = new XMLHttpRequest();
-        //     // Define a função callback
-        //     xhr.onreadystatechange = function () {
-        //       // Verifica se a requisição foi concluída e bem sucedida
-        //       if (xhr.readyState == 4 && xhr.status == 200) {
-        //         // Converte os dados recebidos em JSON
-        //         var data = JSON.parse(xhr.responseText);
-        //         // Chama a função updateMarker com os dados de latitude e longitude
-        //         updateMarker(data.lat, data.lng);
-        //       }
-        //     };
-        //     // Abre a requisição
-        //     xhr.open("GET", "http://seu-servidor-node.js/dados", true);
-        //     // Envia a requisição
-        //     xhr.send();
-        // }
+        //     const locationData = detectLocation();
+        //     const matches = locationData.match(/lat:(-?\d+\.\d+) lng:(-?\d+\.\d+)/);
 
-        // setInterval(getData, 5000);
+        //     if (matches) {
+        //         let lat = parseFloat(matches[1]);
+        //         let lng = parseFloat(matches[2]);
+        //     } else {
+        //         console.error("Formato de dados inválido");
+        //     }
+            
+        // }, 500);
+
+        function detectLocation(){
+            fetch('https://primaxserver-7786a1841f16.herokuapp.com/obter-dados/0000004')
+                  .then(response => response.json())
+                  .then(data => {                     
+                      const gpsLocation = data.parametros;
+                      return gpsLocation;
+                  })
+                  .catch(error => {
+                      console.error('Erro ao obter dados:', error);
+                  });
+        }       
 
     </script>
 

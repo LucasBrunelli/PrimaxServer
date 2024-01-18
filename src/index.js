@@ -11,6 +11,7 @@ let dataBank = Array(100).fill('');
 // 1   - new firmware
 // 2   - firmware checksun
 // 3   - read firmware
+// 4   - location conected bike 
 
 // 11  - nome da bicicleta de id 0000001
 // 12  - nome da bicicleta de id 0000002
