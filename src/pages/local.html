@@ -80,10 +80,9 @@
 
         function initMap() {
 
-            // const locationData = detectLocation();
-            let locationData = '{"parametros": "lat:-15.4548 lng:-45.45664"}';
-            let latgps;
-            let lnggps;
+            let locationData = detectLocation();
+            let latgps = 0;
+            let lnggps = 0;
             
             try {
                 const dataObject = JSON.parse(locationData);
@@ -100,9 +99,6 @@
             } catch (error) {
                 console.error("Erro ao analisar dados JSON:", error);
             }
-
-            // let latgps = -19.9070339;
-            // let lnggps = -43.9259224;
 
             var map = new google.maps.Map(document.getElementById("map"), {
               center: { lat: latgps, lng: lnggps },
