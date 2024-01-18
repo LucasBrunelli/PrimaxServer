@@ -82,8 +82,10 @@
 
             const locationData = detectLocation();
             const matches = locationData.match(/lat:(-?\d+\.\d+) lng:(-?\d+\.\d+)/);
-            let latgps = parseFloat(matches[1]);
-            let lnggps = parseFloat(matches[2]);
+            // let latgps = parseFloat(matches[1]);
+            // let lnggps = parseFloat(matches[2]); 
+            let latgps = -19.9070339;
+            let lnggps = -43.9259224;
 
             var map = new google.maps.Map(document.getElementById("map"), {
               center: { lat: latgps, lng: lnggps },
