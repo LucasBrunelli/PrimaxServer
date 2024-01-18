@@ -136,7 +136,7 @@
               .catch(error => {
                   console.error('Erro ao obter dados:', error);
               }); 
-        }, 500);
+        }, 1000);
 
 
         function newLocation(locationValue){
@@ -156,7 +156,7 @@
                 return; // Saia da função se os dados forem inválidos
             }
 
-            this.marker.position = { lat: latgps, lng: lnggps };
+            // this.marker.position = { lat: latgps, lng: lnggps };
         }       
 
     </script>
