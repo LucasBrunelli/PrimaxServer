@@ -96,20 +96,16 @@
             let latgps = 0;
             let lnggps = 0;
             
-            try {
-                const dataObject = JSON.parse(locationValue);
-                const matches = dataObject.parametros.match(/lat:(-?\d+\.\d+) lng:(-?\d+\.\d+)/);
+            const matches = locationValue.match(/lat:(-?\d+\.\d+) lng:(-?\d+\.\d+)/);
 
-                if (matches) {
-                    latgps = parseFloat(matches[1]);
-                    lnggps = parseFloat(matches[2]);
-                    console.log("Latitude:", latgps);
-                    console.log("Longitude:", lnggps);
-                } else {
-                    console.error("Formato de dados inválido");
-                }
-            } catch (error) {
-                console.error("Erro ao analisar dados JSON:", error);
+            if (matches) {
+                latgps = parseFloat(matches[1]);
+                lnggps = parseFloat(matches[2]);
+                console.log("Latitude:", latgps);
+                console.log("Longitude:", lnggps);
+            } else {
+                console.error("Formato de dados inválido");
+                return; // Saia da função se os dados forem inválidos
             }
 
             var map = new google.maps.Map(document.getElementById("map"), {
