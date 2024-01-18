@@ -91,6 +91,7 @@
               });           
         }
 
+
         function initMapLocation(locationValue){
 
             let latgps = 0;
@@ -123,30 +124,38 @@
             marker.setIcon(blueDot);
         }
        
-        // setInterval(function () {
 
-        //     const locationData = detectLocation();
-        //     const matches = locationData.match(/lat:(-?\d+\.\d+) lng:(-?\d+\.\d+)/);
+        setInterval(function () {
+          fetch('https://primaxserver-7786a1841f16.herokuapp.com/obter-dados/0000004')
+              .then(response => response.json())
+              .then(data => {                     
+                  let locationData = data.parametros;
+                  console.log("Location:", locationData);
+                  newLocation(locationData);
+              })
+              .catch(error => {
+                  console.error('Erro ao obter dados:', error);
+              }); 
+        }, 500);
 
-        //     if (matches) {
-        //         let lat = parseFloat(matches[1]);
-        //         let lng = parseFloat(matches[2]);
-        //     } else {
-        //         console.error("Formato de dados inválido");
-        //     }
+
+        function newLocation(locationValue){
+
+            let latgps = 0;
+            let lnggps = 0;
             
-        // }, 500);
+            const matches = locationValue.match(/lat:(-?\d+\.\d+) lng:(-?\d+\.\d+)/);
 
-        function detectLocation(){
-            fetch('https://primaxserver-7786a1841f16.herokuapp.com/obter-dados/0000004')
-                  .then(response => response.json())
-                  .then(data => {                     
-                      let gpsLocation = data.parametros;
-                      return gpsLocation;
-                  })
-                  .catch(error => {
-                      console.error('Erro ao obter dados:', error);
-                  });
+            if (matches) {
+                latgps = parseFloat(matches[1]);
+                lnggps = parseFloat(matches[2]);
+                console.log("Latitude:", latgps);
+                console.log("Longitude:", lnggps);
+            } else {
+                console.error("Formato de dados inválido");
+                return; // Saia da função se os dados forem inválidos
+            }
+
         }       
 
     </script>
