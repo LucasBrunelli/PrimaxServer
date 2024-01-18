@@ -79,25 +79,25 @@
     <script>
 
         function initMap() {
-
-            let locationData;
-
             fetch('https://primaxserver-7786a1841f16.herokuapp.com/obter-dados/0000004')
               .then(response => response.json())
               .then(data => {                     
-                  locationData = data.parametros;
+                  let locationData = data.parametros;
+                  console.log("Location:", locationData);
+                  initMapLocation(locationData);
               })
               .catch(error => {
                   console.error('Erro ao obter dados:', error);
-              });
+              });           
+        }
 
+        function initMapLocation(locationValue){
 
-            console.log("Location:", data.parametros);
             let latgps = 0;
             let lnggps = 0;
             
             try {
-                const dataObject = JSON.parse(locationData);
+                const dataObject = JSON.parse(locationValue);
                 const matches = dataObject.parametros.match(/lat:(-?\d+\.\d+) lng:(-?\d+\.\d+)/);
 
                 if (matches) {
@@ -126,7 +126,7 @@
             var blueDot = "https://i.imgur.com/elyw5s1.png";
             marker.setIcon(blueDot);
         }
-
+       
         // setInterval(function () {
 
         //     const locationData = detectLocation();
