@@ -78,6 +78,8 @@
 
     <script>
 
+        let marker;
+        
         function initMap() {
             fetch('https://primaxserver-7786a1841f16.herokuapp.com/obter-dados/0000004')
               .then(response => response.json())
@@ -115,7 +117,7 @@
               mapTypeId: "roadmap",
             });
           
-            var marker = new google.maps.Marker({
+            marker = new google.maps.Marker({
               map: map,
               position: { lat: latgps, lng: lnggps },
             });
@@ -151,12 +153,11 @@
                 lnggps = parseFloat(matches[2]);
                 console.log("Latitude:", latgps);
                 console.log("Longitude:", lnggps);
+                marker.setPosition({ lat: latgps, lng: lnggps });
             } else {
                 console.error("Formato de dados inválido");
                 return; // Saia da função se os dados forem inválidos
             }
-
-            // this.marker.position = { lat: latgps, lng: lnggps };
         }       
 
     </script>
