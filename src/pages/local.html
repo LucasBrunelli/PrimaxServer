@@ -80,7 +80,17 @@
 
         function initMap() {
 
-            let locationData = detectLocation();
+            let locationData;
+
+            fetch('https://primaxserver-7786a1841f16.herokuapp.com/obter-dados/0000004')
+                  .then(response => response.json())
+                  .then(data => {                     
+                      locationData = data.parametros;
+                  })
+                  .catch(error => {
+                      console.error('Erro ao obter dados:', error);
+                  });
+
             let latgps = 0;
             let lnggps = 0;
             
