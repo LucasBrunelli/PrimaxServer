@@ -114,6 +114,10 @@ router.get("/local", (req, res) => {
     res.sendFile(path.join(__dirname + "/pages/local.html"));
 });
 
+router.get("/bluetooth", (req, res) => {
+    res.sendFile(path.join(__dirname + "/pages/bluetooth.html"));
+});
+
 app.use(router);
 
 app.listen(process.env.PORT || 3333, () => {
