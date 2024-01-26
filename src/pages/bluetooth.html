@@ -72,7 +72,23 @@
     </div>
 
 
-
+    <button onclick="buscarServidores()">Buscar Servidores BLE</button>
+    <ul id="servidores"></ul>
+    <script>
+      async function buscarServidores() {
+        const dispositivos = await navigator.bluetooth.requestDevice({
+          acceptAllDevices: true,
+          optionalServices: []
+        })
+        const listaServidores = document.getElementById('servidores')
+        listaServidores.innerHTML = ''
+        dispositivos.forEach(dispositivo => {
+          const itemLista = document.createElement('li')
+          itemLista.textContent = dispositivo.name
+          listaServidores.appendChild(itemLista)
+        })
+      }
+    </script>
 
 
     
