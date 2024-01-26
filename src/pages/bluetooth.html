@@ -72,23 +72,24 @@
     </div>
 
 
-    <button onclick="buscarServidores()">Buscar Servidores BLE</button>
-    <ul id="servidores"></ul>
+    <input type="text" id="mensagem" placeholder="Digite sua mensagem aqui">
+    <button onclick="enviarMensagem()">Enviar</button>
     <script>
-      async function buscarServidores() {
+      let characteristic;
+
+      async function conectarDispositivo() {
         const dispositivo = await navigator.bluetooth.requestDevice({
-          acceptAllDevices: true,
-          optionalServices: []
-        })
-        const gattServer = await dispositivo.gatt.connect()
-        const servicos = await gattServer.getPrimaryServices()
-        const listaServidores = document.getElementById('servidores')
-        listaServidores.innerHTML = ''
-        for (const servico of servicos) {
-          const itemLista = document.createElement('li')
-          itemLista.textContent = servico.uuid
-          listaServidores.appendChild(itemLista)
-        }
+          filters: [{ services: ['<service-uuid>'] }]
+        });
+        const gattServer = await dispositivo.gatt.connect();
+        const service = await gattServer.getPrimaryService('<service-uuid>');
+        characteristic = await service.getCharacteristic('<characteristic-uuid>');
+      }
+
+      async function enviarMensagem() {
+        const mensagem = document.getElementById('mensagem').value;
+        const buffer = new TextEncoder().encode(mensagem);
+        await characteristic.writeValue(buffer);
       }
     </script>
 
@@ -115,7 +116,7 @@
 
 
 
-    <!-- <button id="list-devices">List Devices</button>
+    <button id="list-devices">List Devices</button>
     <ul id="device-list"></ul>
     <script>
       const listDevicesButton = document.getElementById('list-devices');
@@ -154,7 +155,7 @@
           console.error(error);
         }
       });
-    </script> -->
+    </script>
 
 </body>
 </html>
