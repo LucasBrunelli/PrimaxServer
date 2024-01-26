@@ -71,7 +71,31 @@
         </a>
     </div>
 
-    <button id="list-devices">List Devices</button>
+
+
+
+
+    <button onclick="exibirServidoresBLE()">Exibir servidores BLE</button>
+
+    <script src="node_modules/node-ble/index.js"></script>
+    <script>
+      async function exibirServidoresBLE() {
+        const { createBluetooth } = require('node-ble');
+        const { bluetooth, destroy } = createBluetooth();
+        const adapter = await bluetooth.defaultAdapter();
+        const devices = await adapter.getDevices();
+        const deviceNames = devices.map(device => device.name);
+        const selectedDeviceName = window.prompt(`Selecione um dispositivo BLE:\n${deviceNames.join('\n')}`);
+        const selectedDevice = devices.find(device => device.name === selectedDeviceName);
+        // Conectar ao dispositivo selecionado aqui
+        destroy();
+      }
+    </script>
+
+
+
+
+    <!-- <button id="list-devices">List Devices</button>
     <ul id="device-list"></ul>
     <script>
       const listDevicesButton = document.getElementById('list-devices');
@@ -87,7 +111,7 @@
 
           // Obtenha o servidor GATT (Generic Attribute Profile)
           const server = await device.gatt.connect();
-          const services = await server.getPrimaryServices();
+          const services = await server.getServices();
 
           // Exiba os serviços e características
           deviceList.innerHTML = '';
@@ -110,7 +134,7 @@
           console.error(error);
         }
       });
-    </script>
+    </script> -->
 
 </body>
 </html>
