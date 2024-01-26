@@ -89,26 +89,6 @@
         const sendTextButton = document.getElementById('send-text');
         const inputText = document.getElementById('input-text');
 
-        sendTextButton.addEventListener('click', async () => {
-        try {
-            // Obtenha o servidor GATT (Generic Attribute Profile)
-            const server = await device.gatt.connect();
-            const service = await server.getPrimaryService('service_uuid');
-            const characteristic = await service.getCharacteristic('characteristic_uuid');
-
-            // Envie a frase para o dispositivo
-            const text = inputText.value;
-            const encoder = new TextEncoder();
-            await characteristic.writeValue(encoder.encode(text));
-
-            // Desconecte-se do dispositivo
-            await server.disconnect();
-        } catch (error) {
-            console.error(error);
-        }
-        });
-
-
 
         listDevicesButton.addEventListener('click', async () => {
         try {
@@ -143,6 +123,27 @@
           console.error(error);
         }
         });
+
+
+        sendTextButton.addEventListener('click', async () => {
+        try {
+            // Obtenha o servidor GATT (Generic Attribute Profile)
+            const server = await device.gatt.connect();
+            const service = await server.getPrimaryService('00001800-0000-1000-8000-00805f9b34fb');
+            const characteristic = await service.getCharacteristic('00002a00-0000-1000-8000-00805f9b34fb');
+
+            // Envie a frase para o dispositivo
+            const text = inputText.value;
+            const encoder = new TextEncoder();
+            await characteristic.writeValue(encoder.encode(text));
+
+            // Desconecte-se do dispositivo
+            await server.disconnect();
+        } catch (error) {
+            console.error(error);
+        }
+        });
+
 
     </script>
 
