@@ -75,22 +75,8 @@
 
 
 
-    <button onclick="buscarServidores()">Buscar Servidores BLE</button>
-    <ul id="servidores"></ul>
-    <script>
-      async function buscarServidores() {
-        const response = await fetch('/servidores')
-        const servidores = await response.json()
-        const listaServidores = document.getElementById('servidores')
-        listaServidores.innerHTML = ''
-        servidores.forEach(servidor => {
-          const itemLista = document.createElement('li')
-          itemLista.textContent = servidor
-          listaServidores.appendChild(itemLista)
-        })
-      }
-    </script>
     
+
     <!-- <button onclick="exibirServidoresBLE()">Exibir servidores BLE</button>
 
     <script src="node_modules/node-ble/src/index.js"></script>

@@ -3,49 +3,8 @@ const path = require("path");
 const app = express();
 const router = express.Router();
 
-
-
-const http = require('http')
-const { createBluetooth } = require('node-ble')
-const { bluetooth, destroy } = createBluetooth()
-
-
 let dataPassWord = "";
 let dataBank = Array(100).fill('');
-
-
-// Middleware para processar o corpo da requisição como texto
-app.use(express.text());
-
-
-
-
-const server = http.createServer(async (req, res) => {
-  if (req.url === '/servidores') {
-    const adapter = await bluetooth.defaultAdapter()
-    if (! await adapter.isDiscovering()) await adapter.startDiscovery()
-    const dispositivos = await adapter.getDevices()
-    const servidores = []
-    for (const dispositivo of dispositivos) {
-      const gattServer = await dispositivo.gatt()
-      const servicos = await gattServer.getPrimaryServices()
-      for (const servico of servicos) {
-        servidores.push(servico.uuid)
-      }
-    }
-    res.setHeader('Content-Type', 'application/json')
-    res.end(JSON.stringify(servidores))
-  } else {
-    res.statusCode = 404
-    res.end()
-  }
-})
-
-process.on('SIGINT', () => {
-    destroy()
-    server.close()
-  })
-
 // maps key = AIzaSyCrfa1EuP78q3dI7Pm7B0RL1UTNKjXvRrw 
 
 // 0   - status de tarefas para a bicicleta espesifica
@@ -57,6 +16,9 @@ process.on('SIGINT', () => {
 // 11  - nome da bicicleta de id 0000001
 // 12  - nome da bicicleta de id 0000002
 // 13  - nome da bicicleta de id 0000003
+
+// Middleware para processar o corpo da requisição como texto
+app.use(express.text());
 
 // Rota para receber dados da página HTML e armazená-los no dataBank
 app.post("/receber-dados/:posicao", (req, res) => {
