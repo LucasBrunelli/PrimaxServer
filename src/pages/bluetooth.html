@@ -76,17 +76,19 @@
     <ul id="servidores"></ul>
     <script>
       async function buscarServidores() {
-        const dispositivos = await navigator.bluetooth.requestDevice({
+        const dispositivo = await navigator.bluetooth.requestDevice({
           acceptAllDevices: true,
           optionalServices: []
         })
+        const gattServer = await dispositivo.gatt.connect()
+        const servicos = await gattServer.getPrimaryServices()
         const listaServidores = document.getElementById('servidores')
         listaServidores.innerHTML = ''
-        dispositivos.forEach(dispositivo => {
+        for (const servico of servicos) {
           const itemLista = document.createElement('li')
-          itemLista.textContent = dispositivo.name
+          itemLista.textContent = servico.uuid
           listaServidores.appendChild(itemLista)
-        })
+        }
       }
     </script>
 
