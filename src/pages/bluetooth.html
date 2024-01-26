@@ -84,51 +84,45 @@
         </a>
     </div>
 
-    <button onclick="startBluetooth()">Procurar Dispositivos Bluetooth</button>
-    <ul id="deviceList"></ul>
-
+    <button id="list-devices">List Devices</button>
+    <ul id="device-list"></ul>
     <script>
-        async function startBluetooth() {
+      const listDevicesButton = document.getElementById('list-devices');
+      const deviceList = document.getElementById('device-list');
+
+      listDevicesButton.addEventListener('click', async () => {
         try {
-            const device = await navigator.bluetooth.requestDevice({
+          // Solicite permissão para acessar o Bluetooth
+          const device = await navigator.bluetooth.requestDevice({
             acceptAllDevices: true,
-            optionalServices: [] // Não especificamos serviços aqui para listar todos os serviços do dispositivo
-            });
+            optionalServices: ['generic_access']
+          });
 
-            // Conectar ao dispositivo
-            const server = await device.gatt.connect();
+          // Obtenha o servidor GATT (Generic Attribute Profile)
+          const server = await device.gatt.connect();
+          const services = await server.getPrimaryServices();
 
-            // Listar os serviços e características
-            listServicesAndCharacteristics(server, device.name);
-
-            alert(`Conectado a ${device.name}`);
-        } catch (error) {
-            console.error('Erro de conexão Bluetooth:', error);
-        }
-        }
-
-        async function listServicesAndCharacteristics(server, deviceName) {
-        const deviceList = document.getElementById('deviceList');
-        const listItem = document.createElement('li');
-        listItem.textContent = `Dispositivo: ${deviceName}`;
-        deviceList.appendChild(listItem);
-
-        const services = await server.getPrimaryServices();
-
-        services.forEach(async (service) => {
-            const serviceItem = document.createElement('li');
-            serviceItem.textContent = `Serviço UUID: ${service.uuid}`;
-            deviceList.appendChild(serviceItem);
+          // Exiba os serviços e características
+          deviceList.innerHTML = '';
+          for (const service of services) {
+            const serviceElement = document.createElement('li');
+            serviceElement.textContent = `Service: ${service.uuid}`;
+            deviceList.appendChild(serviceElement);
 
             const characteristics = await service.getCharacteristics();
+            for (const characteristic of characteristics) {
+              const characteristicElement = document.createElement('li');
+              characteristicElement.textContent = `Characteristic: ${characteristic.uuid}`;
+              deviceList.appendChild(characteristicElement);
+            }
+          }
 
-            characteristics.forEach((characteristic) => {
-            const characteristicItem = document.createElement('li');
-            characteristicItem.textContent = `Característica UUID: ${characteristic.uuid}`;
-            deviceList.appendChild(characteristicItem);
-            });
-        });
+          // Desconecte-se do dispositivo
+          await server.disconnect();
+        } catch (error) {
+          console.error(error);
         }
+      });
     </script>
 
 </body>
