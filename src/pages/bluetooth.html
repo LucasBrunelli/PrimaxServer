@@ -77,11 +77,40 @@
 
     <button id="list-devices">List Devices</button>
     <ul id="device-list"></ul>
-    <script>
-      const listDevicesButton = document.getElementById('list-devices');
-      const deviceList = document.getElementById('device-list');
 
-      listDevicesButton.addEventListener('click', async () => {
+    <input type="text" id="input-text">
+    <button id="send-text">Send Text</button>
+
+    <script>
+
+        const listDevicesButton = document.getElementById('list-devices');
+        const deviceList = document.getElementById('device-list');
+
+        const sendTextButton = document.getElementById('send-text');
+        const inputText = document.getElementById('input-text');
+
+        sendTextButton.addEventListener('click', async () => {
+        try {
+            // Obtenha o servidor GATT (Generic Attribute Profile)
+            const server = await device.gatt.connect();
+            const service = await server.getPrimaryService('service_uuid');
+            const characteristic = await service.getCharacteristic('characteristic_uuid');
+
+            // Envie a frase para o dispositivo
+            const text = inputText.value;
+            const encoder = new TextEncoder();
+            await characteristic.writeValue(encoder.encode(text));
+
+            // Desconecte-se do dispositivo
+            await server.disconnect();
+        } catch (error) {
+            console.error(error);
+        }
+        });
+
+
+
+        listDevicesButton.addEventListener('click', async () => {
         try {
           // Solicite permissão para acessar o Bluetooth
           const device = await navigator.bluetooth.requestDevice({
@@ -113,7 +142,8 @@
         } catch (error) {
           console.error(error);
         }
-      });
+        });
+
     </script>
 
 </body>
