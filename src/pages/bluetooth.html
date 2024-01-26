@@ -1,17 +1,4 @@
-
-<!DOCTYPE busconfig PUBLIC "-//freedesktop//DTD D-BUS Bus Configuration 1.0//EN"
-  "http://www.freedesktop.org/standards/dbus/1.0/busconfig.dtd">
-<busconfig>
-  <policy user="%userid%">
-   <allow own="org.bluez"/>
-    <allow send_destination="org.bluez"/>
-    <allow send_interface="org.bluez.GattCharacteristic1"/>
-    <allow send_interface="org.bluez.GattDescriptor1"/>
-    <allow send_interface="org.freedesktop.DBus.ObjectManager"/>
-    <allow send_interface="org.freedesktop.DBus.Properties"/>
-  </policy>
-</busconfig>
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -95,13 +82,12 @@
           // Solicite permissão para acessar o Bluetooth
           const device = await navigator.bluetooth.requestDevice({
             acceptAllDevices: true,
-            optionalServices: ['00001812-0000-1000-8000-00805f9b34fb']
+            optionalServices: ['generic_access']
           });
 
           // Obtenha o servidor GATT (Generic Attribute Profile)
           const server = await device.gatt.connect();
-          const services = await server.optionalServices
-        //   const services = await server.getPrimaryServices();
+          const services = await server.getPrimaryServices();
 
           // Exiba os serviços e características
           deviceList.innerHTML = '';
@@ -118,7 +104,7 @@
             }
           }
 
-          // Desconecte-se do dispositivo
+          // Mantenha a conexão ativa
           // await server.disconnect();
         } catch (error) {
           console.error(error);
