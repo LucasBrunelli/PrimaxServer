@@ -100,15 +100,21 @@
 
           // Obtenha o servidor GATT (Generic Attribute Profile)
           const server = await device.gatt.connect();
-          const service = await server.getPrimaryService('00001812-0000-1000-8000-00805f9b34fb');
-          const characteristics = await service.getCharacteristics();
+          const services = await server.getPrimaryServices();
 
           // Exiba os serviços e características
           deviceList.innerHTML = '';
-          for (const characteristic of characteristics) {
-            const characteristicElement = document.createElement('li');
-            characteristicElement.textContent = `Characteristic: ${characteristic.uuid}`;
-            deviceList.appendChild(characteristicElement);
+          for (const service of services) {
+            const serviceElement = document.createElement('li');
+            serviceElement.textContent = `Service: ${service.uuid}`;
+            deviceList.appendChild(serviceElement);
+
+            const characteristics = await service.getCharacteristics();
+            for (const characteristic of characteristics) {
+              const characteristicElement = document.createElement('li');
+              characteristicElement.textContent = `Characteristic: ${characteristic.uuid}`;
+              deviceList.appendChild(characteristicElement);
+            }
           }
 
           // Desconecte-se do dispositivo
