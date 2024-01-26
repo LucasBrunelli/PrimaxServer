@@ -100,7 +100,8 @@
 
           // Obtenha o servidor GATT (Generic Attribute Profile)
           const server = await device.gatt.connect();
-          const services = await server.getPrimaryServices();
+          const services = await server.optionalServices
+        //   const services = await server.getPrimaryServices();
 
           // Exiba os serviços e características
           deviceList.innerHTML = '';
