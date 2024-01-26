@@ -72,23 +72,6 @@
     </div>
 
 
-    <!-- <button onclick="exibirServidoresBLE()">Exibir servidores BLE</button>
-
-    <script src="node_modules/node-ble/src/index.js"></script>
-    <script>
-      async function exibirServidoresBLE() {
-        const { createBluetooth } = require('node-ble');
-        const { bluetooth, destroy } = createBluetooth();
-        const adapter = await bluetooth.defaultAdapter();
-        const devices = await adapter.getDevices();
-        const deviceNames = devices.map(device => device.name);
-        const selectedDeviceName = window.prompt(`Selecione um dispositivo BLE:\n${deviceNames.join('\n')}`);
-        const selectedDevice = devices.find(device => device.name === selectedDeviceName);
-        // Conectar ao dispositivo selecionado aqui
-        destroy();
-      }
-    </script> -->
-
 
 
 
@@ -108,7 +91,7 @@
 
           // Obtenha o servidor GATT (Generic Attribute Profile)
           const server = await device.gatt.connect();
-          const services = await server.getPrimaryService();
+          const services = await server.getPrimaryServices();
 
           // Exiba os serviços e características
           deviceList.innerHTML = '';
@@ -125,8 +108,8 @@
             }
           }
 
-          // Mantenha a conexão ativa
-          // await server.disconnect();
+          // Desconecte-se do dispositivo
+        //   await server.disconnect();
         } catch (error) {
           console.error(error);
         }
