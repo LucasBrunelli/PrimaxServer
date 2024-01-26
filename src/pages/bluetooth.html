@@ -75,69 +75,7 @@
 
 
 
-    <button id="list-devices">List Devices</button>
-    <ul id="device-list"></ul>
-    <input type="text" id="input-text">
-    <button id="send-text">Send Text</button>
-    <script>
-      let device;
-      const listDevicesButton = document.getElementById('list-devices');
-      const deviceList = document.getElementById('device-list');
-      const inputText = document.getElementById('input-text');
-      const sendTextButton = document.getElementById('send-text');
-
-      listDevicesButton.addEventListener('click', async () => {
-        try {
-          // Solicite permissão para acessar o Bluetooth
-          device = await navigator.bluetooth.requestDevice({
-            acceptAllDevices: true
-          });
-
-          // Obtenha o servidor GATT (Generic Attribute Profile)
-          const server = await device.gatt.connect();
-          const services = await server.getPrimaryServices();
-
-          // Exiba os serviços e características
-          deviceList.innerHTML = '';
-          for (const service of services) {
-            const serviceElement = document.createElement('li');
-            serviceElement.textContent = `Service: ${service.uuid}`;
-            deviceList.appendChild(serviceElement);
-
-            const characteristics = await service.getCharacteristics();
-            for (const characteristic of characteristics) {
-              const characteristicElement = document.createElement('li');
-              characteristicElement.textContent = `Characteristic: ${characteristic.uuid}`;
-              deviceList.appendChild(characteristicElement);
-            }
-          }
-
-          // Mantenha a conexão ativa
-          // await server.disconnect();
-        } catch (error) {
-          console.error(error);
-        }
-      });
-
-      sendTextButton.addEventListener('click', async () => {
-        try {
-          // Obtenha o servidor GATT (Generic Attribute Profile)
-          const server = await device.gatt.connect();
-          const service = await server.getPrimaryService('0000180a-0000-1000-8000-00805f9b34fb');
-          const characteristic = await service.getCharacteristic('00002a24-0000-1000-8000-00805f9b34fb');
-
-          // Envie a frase para o dispositivo
-          const text = inputText.value;
-          const encoder = new TextEncoder();
-          await characteristic.writeValue(encoder.encode(text));
-
-          // Desconecte-se do dispositivo
-          await server.disconnect();
-        } catch (error) {
-          console.error(error);
-        }
-      });
-    </script>
+    
 
 </body>
 </html>
