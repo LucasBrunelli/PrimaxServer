@@ -84,5 +84,52 @@
         </a>
     </div>
 
+    <button onclick="startBluetooth()">Procurar Dispositivos Bluetooth</button>
+    <ul id="deviceList"></ul>
+
+    <script>
+        async function startBluetooth() {
+        try {
+            const device = await navigator.bluetooth.requestDevice({
+            acceptAllDevices: true,
+            optionalServices: [] // Não especificamos serviços aqui para listar todos os serviços do dispositivo
+            });
+
+            // Conectar ao dispositivo
+            const server = await device.gatt.connect();
+
+            // Listar os serviços e características
+            listServicesAndCharacteristics(server, device.name);
+
+            alert(`Conectado a ${device.name}`);
+        } catch (error) {
+            console.error('Erro de conexão Bluetooth:', error);
+        }
+        }
+
+        async function listServicesAndCharacteristics(server, deviceName) {
+        const deviceList = document.getElementById('deviceList');
+        const listItem = document.createElement('li');
+        listItem.textContent = `Dispositivo: ${deviceName}`;
+        deviceList.appendChild(listItem);
+
+        const services = await server.getPrimaryServices();
+
+        services.forEach(async (service) => {
+            const serviceItem = document.createElement('li');
+            serviceItem.textContent = `Serviço UUID: ${service.uuid}`;
+            deviceList.appendChild(serviceItem);
+
+            const characteristics = await service.getCharacteristics();
+
+            characteristics.forEach((characteristic) => {
+            const characteristicItem = document.createElement('li');
+            characteristicItem.textContent = `Característica UUID: ${characteristic.uuid}`;
+            deviceList.appendChild(characteristicItem);
+            });
+        });
+        }
+    </script>
+
 </body>
 </html>
