@@ -95,30 +95,24 @@
           // Solicite permissão para acessar o Bluetooth
           const device = await navigator.bluetooth.requestDevice({
             acceptAllDevices: true,
-            optionalServices: ['generic_access']
+            optionalServices: ['00001812-0000-1000-8000-00805f9b34fb']
           });
 
           // Obtenha o servidor GATT (Generic Attribute Profile)
           const server = await device.gatt.connect();
-          const services = await server.getPrimaryServices();
+          const service = await server.getPrimaryService('00001812-0000-1000-8000-00805f9b34fb');
+          const characteristics = await service.getCharacteristics();
 
           // Exiba os serviços e características
           deviceList.innerHTML = '';
-          for (const service of services) {
-            const serviceElement = document.createElement('li');
-            serviceElement.textContent = `Service: ${service.uuid}`;
-            deviceList.appendChild(serviceElement);
-
-            const characteristics = await service.getCharacteristics();
-            for (const characteristic of characteristics) {
-              const characteristicElement = document.createElement('li');
-              characteristicElement.textContent = `Characteristic: ${characteristic.uuid}`;
-              deviceList.appendChild(characteristicElement);
-            }
+          for (const characteristic of characteristics) {
+            const characteristicElement = document.createElement('li');
+            characteristicElement.textContent = `Characteristic: ${characteristic.uuid}`;
+            deviceList.appendChild(characteristicElement);
           }
 
           // Desconecte-se do dispositivo
-          await server.disconnect();
+          // await server.disconnect();
         } catch (error) {
           console.error(error);
         }
